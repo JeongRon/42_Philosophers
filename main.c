@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:05:53 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/07/29 22:17:01 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/07/31 08:03:20 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	set_philo(t_philo *philo, t_info info)
-{
-	int	i;
-
-	philo = (t_philo *)malloc(sizeof(t_philo) * info.philo_cnt);
-	if (!philo)
-		return (ft_error("[Malloc] Philo Error\n"));
-	i = -1;
-	while (++i < info.philo_cnt)
-	{
-		philo[i].id = i;
-		philo[i].start_time = 0;
-		philo[i].cost_time = 0;
-		philo[i].fork_left = 0;
-		philo[i].fork_right = 0;
-		philo[i].eat_cnt = 0;
-		philo[i].info = &info;
-	}
-	return (1);
-}
 
 time_t	get_time(void)
 {
@@ -41,33 +20,20 @@ time_t	get_time(void)
 	return (current.tv_sec * 1000 + current.tv_usec / 1000);
 }
 
-void	*run_thread(void *arg)
+int	print_condition(t_philo *philo, char *str)
 {
-	t_philo	*philo;
+	time_t	now;
+	time_t	print_time;
 
-	philo = (t_philo *)arg;
-	philo->start_time = get_time();
-	usleep(100);
-	while (1)
-	{
-		
-	}
-}
-
-int	simulate(t_info *info, t_philo *philo)
-{
-	int	i;
-
-	i = -1;
-	while (++i < info->philo_cnt)
-	{
-		philo[i].cost_time = 0; // time 구하기
-		if (pthread_create(&(philo[i].thread), NULL, run_thread, &(philo[i])))
-			return (ft_rerror("[Thread] Creat Error\n"));
-	}
-	i = -1;
-	while (++i < info->philo_cnt)
-		pthread_join(philo[i].thread, NULL);
+	pthread_mutex_lock(&(philo->info->print));
+	if (philo->info->finish_flag == 1)
+		return (0);
+	now = get_time();
+	print_time = now - philo->first_time;
+	if (now - philo->start_time > philo->info->life_time)
+		return (0);
+	printf("%ld %d %s\n", print_time, philo->id + 1, str);
+	pthread_mutex_unlock(&(philo->info->print));
 	return (1);
 }
 
@@ -77,11 +43,7 @@ int	main(int ac, char **av)
 	t_philo	*philo;
 
 	if (input_parsing(ac, av, &info) == 1)
-	{
 		if (set_philo(&philo, info) == 1)
-		{
 			simulate(&info, philo);
-		}
-	}
 	return (0);
 }

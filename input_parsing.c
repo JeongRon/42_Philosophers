@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:13:05 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/07/29 19:13:39 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/07/31 06:21:43 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	check_av(char *str)
 	int			i;
 	long long	result;
 
-	// 문자열 규격 (첫 문자 '+' 제외 모두 숫자 문자 && [음수,0,int범위 초과] 에러)
 	i = 0;
 	if (str[i] == '+')
 		i++;
@@ -39,7 +38,7 @@ static int	check_av(char *str)
 	return ((int)result);
 }
 
-int	set_mutex_fork(t_info *info)
+int	set_mutex(t_info *info)
 {
 	int	cnt;
 	int	i;
@@ -55,6 +54,8 @@ int	set_mutex_fork(t_info *info)
 			return (0);
 		i++;
 	}
+	if (pthread_mutex_init(&(info->print), NULL) != 0)
+		return (0);
 	return (1);
 }
 
@@ -69,6 +70,8 @@ int	input_parsing(int ac, char **av, t_info *info)
 	info->eat_time = check_av(av[3]);
 	info->sleep_time = check_av(av[4]);
 	info->option_cnt = -1;
+	info->option_finish_cnt = 0;
+	info->finish_flag = 0;
 	if (info->philo_cnt == 0 || info->life_time == 0
 		|| info->eat_time == 0 || info->sleep_time == 0
 		|| info->option_cnt == 0)
@@ -79,7 +82,7 @@ int	input_parsing(int ac, char **av, t_info *info)
 		if (info->option_cnt == 0)
 			return (ft_error("[Invalid] Argument Error\n"));
 	}
-	if (set_mutex_fork(&info) == 0)
-		return (ft_error("[Set] Mutex Fork Error\n"));
+	if (set_mutex(info) == 0)
+		return (ft_error("[Set] Mutex Error\n"));
 	return (1);
 }
