@@ -38,7 +38,7 @@ static int	check_av(char *str)
 	return ((int)result);
 }
 
-int	set_mutex(t_info *info)
+static int	set_mutex(t_info *info)
 {
 	int	cnt;
 	int	i;
@@ -59,12 +59,10 @@ int	set_mutex(t_info *info)
 	return (1);
 }
 
-int	input_parsing(int ac, char **av, t_info *info)
+int	set_info(int ac, char **av, t_info *info)
 {
-	// 무조건 ac = 5, 6
 	if (ac < 5 || 6 < ac)
 		return (ft_error("[Count] Argument Error\n"));
-	// 입력 av => int형 범위 양수인지 체크 => info 구조체에 넣기 
 	info->philo_cnt = check_av(av[1]);
 	info->life_time = check_av(av[2]);
 	info->eat_time = check_av(av[3]);
@@ -73,8 +71,7 @@ int	input_parsing(int ac, char **av, t_info *info)
 	info->option_finish_cnt = 0;
 	info->finish_flag = 0;
 	if (info->philo_cnt == 0 || info->life_time == 0
-		|| info->eat_time == 0 || info->sleep_time == 0
-		|| info->option_cnt == 0)
+		|| info->eat_time == 0 || info->sleep_time == 0)
 		return (ft_error("[Invalid] Argument Error\n"));
 	if (ac == 6)
 	{

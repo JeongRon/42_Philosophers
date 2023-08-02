@@ -46,25 +46,21 @@ typedef struct s_philo
 	pthread_t	thread;	
 }	t_philo;
 
-// utils.c
-int	ft_strlen(const char *s);
-int	ft_error(char *str);
-// input_parsing.c
-int	input_parsing(int ac, char **av, t_info *info);
+// set_info.c
+int	set_info(int ac, char **av, t_info *info);
 // set_philo.c
-int	set_philo(t_philo **philo, t_info info);
+int	set_philo(t_philo **philo, t_info *info);
 // simulate.c
-int	simulate(t_info *info, t_philo *philo);
-void	*run_thread(void *arg);
-void	philo_finish_check(t_info *info, t_philo *philo);
-
-// act_philo.c
+int	simulate(t_philo *philo);
+// simulate_action.c
 int	take_fork(t_philo *philo);
 int	eating(t_philo *philo);
 int	sleeping(t_philo *philo);
 int	thinking(t_philo *philo);
-// main.c 
-int	print_condition(t_philo *philo, char *str);
+// utils.c
+int	ft_strlen(const char *s);
+int	ft_error(char *str);
 time_t	get_time(void);
+int	print_condition(t_philo *philo, char *str);
 
 #endif 

@@ -8,10 +8,10 @@ RM = rm -f
 HEADER	=	philo.h
 
 SRCS	=	main.c \
-			input_parsing.c \
+			set_info.c \
 			set_philo.c \
 			simulate.c \
-			act_philo.c \
+			simulate_action.c \
 			utils.c \
 
 OBJS	=	$(SRCS:%.c=%.o)
