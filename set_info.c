@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_parsing.c                                    :+:      :+:    :+:   */
+/*   set_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:13:05 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/07/31 06:21:43 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/07 21:00:23 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static int	set_mutex(t_info *info)
 			return (0);
 		i++;
 	}
+	if (pthread_mutex_init(&(info->start), NULL) != 0)
+		return (0);
 	if (pthread_mutex_init(&(info->print), NULL) != 0)
 		return (0);
 	return (1);
@@ -79,6 +81,7 @@ int	set_info(int ac, char **av, t_info *info)
 		if (info->option_cnt == 0)
 			return (ft_error("[Invalid] Argument Error\n"));
 	}
+	info->first_time = 0;
 	if (set_mutex(info) == 0)
 		return (ft_error("[Set] Mutex Error\n"));
 	return (1);

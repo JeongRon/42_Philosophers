@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:13:52 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/07/29 17:14:17 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/07 21:00:47 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	print_condition(t_philo *philo, char *str)
 		return (0);
 	}
 	now = get_time();
-	print_time = now - philo->first_time;
+	print_time = now - philo->info->first_time;
 	printf("%ld %d %s\n", print_time, philo->id + 1, str);
 	if (str[0] == 'd')
 		philo->info->finish_flag = 1;

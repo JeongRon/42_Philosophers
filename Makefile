@@ -1,7 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/07 16:41:08 by jeongrol          #+#    #+#              #
+#    Updated: 2023/08/08 17:44:21 by jeongrol         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 
 RM = rm -f
 
@@ -33,6 +45,6 @@ re:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS) $(HEADER)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -pthread
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 .PHONY:	all clean fclean re bonus
