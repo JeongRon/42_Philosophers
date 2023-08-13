@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:13:05 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/07 21:00:23 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:31:15 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,35 @@ static int	set_mutex(t_info *info)
 	info->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * cnt);
 	if (!info->fork)
 		return (0);
-	i = 0;
-	while (i < info->philo_cnt)
+	i = -1;
+	while (++i < info->philo_cnt)
 	{
 		if (pthread_mutex_init(&(info->fork[i]), NULL) != 0)
 			return (0);
-		i++;
 	}
 	if (pthread_mutex_init(&(info->start), NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&(info->print), NULL) != 0)
 		return (0);
+	if (pthread_mutex_init(&(info->time), NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&(info->eat), NULL) != 0)
+		return (0);
+	return (1);
+}
+
+static int	set_fork_state(t_info *info)
+{
+	int	cnt;
+	int	i;
+
+	cnt = info->philo_cnt;
+	info->fork_state = (int *)malloc(sizeof(int) * cnt);
+	if (!info->fork_state)
+		return (0);
+	i = -1;
+	while (++i < info->philo_cnt)
+		info->fork_state[i] = 0;
 	return (1);
 }
 
@@ -84,5 +102,7 @@ int	set_info(int ac, char **av, t_info *info)
 	info->first_time = 0;
 	if (set_mutex(info) == 0)
 		return (ft_error("[Set] Mutex Error\n"));
+	if (set_fork_state(info) == 0)
+		return (ft_error("[Set] Allocated fork Error\n"));
 	return (1);
 }
