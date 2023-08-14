@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 22:48:51 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/14 17:10:51 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:07:15 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	*run_thread(void *arg)
 	return (NULL);
 }
 
-int	simulate(t_philo *philo)
+void	simulate(t_philo *philo)
 {
 	int			i;
 
@@ -108,5 +108,4 @@ int	simulate(t_philo *philo)
 	i = -1;
 	while (++i < philo->info->philo_cnt)
 		pthread_join(philo[i].thread, NULL);
-	return (1);
 }

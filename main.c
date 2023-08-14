@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:05:53 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/08 20:42:20 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:07:58 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ int	main(int ac, char **av)
 	if (set_info(ac, av, &info) == 1)
 	{
 		if (set_philo(&philo, &info) == 1)
-			simulate(philo);
+		{
+			if (info.philo_cnt == 1)
+				simulate(philo);
+			else
+				simulate(philo);
+		}
 	}
 	return (0);
 }

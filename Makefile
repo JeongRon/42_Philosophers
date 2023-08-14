@@ -6,15 +6,14 @@
 #    By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 16:41:08 by jeongrol          #+#    #+#              #
-#    Updated: 2023/08/13 21:41:05 by jeongrol         ###   ########.fr        #
+#    Updated: 2023/08/14 21:52:50 by jeongrol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
-# -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 
 RM = rm -f
 

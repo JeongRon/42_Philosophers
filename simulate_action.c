@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 06:25:05 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/14 20:21:14 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:48:00 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,13 @@ int	eating(t_philo *philo)
 int	sleeping_thinking(t_philo *philo)
 {
 	if (print_condition(philo, "is sleeping") == 0)
+	{
+		philo->info->fork_state[philo->fork_right] = 0;
+		pthread_mutex_unlock(&(philo->info->fork[philo->fork_right]));
+		philo->info->fork_state[philo->fork_left] = 0;
+		pthread_mutex_unlock(&(philo->info->fork[philo->fork_left]));
 		return (0);
+	}
 	philo->info->fork_state[philo->fork_right] = 0;
 	pthread_mutex_unlock(&(philo->info->fork[philo->fork_right]));
 	philo->info->fork_state[philo->fork_left] = 0;
