@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:13:52 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/13 22:00:30 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:08:53 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	print_condition(t_philo *philo, char *str)
 	time_t	now;
 	time_t	print_time;
 
+	pthread_mutex_lock(&(philo->info->print));
 	if (philo->info->finish_flag == 1)
 	{
 		pthread_mutex_unlock(&(philo->info->print));
