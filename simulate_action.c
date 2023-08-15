@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 06:25:05 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/14 21:48:00 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:53:18 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	take_left_fork(t_philo *philo)
 
 int	take_right_fork(t_philo *philo)
 {
+	if (philo->info->philo_cnt == 1)
+		return (0);
 	pthread_mutex_lock(&(philo->info->fork[philo->fork_right]));
 	if (philo->info->fork_state[philo->fork_right] == 0)
 		philo->info->fork_state[philo->fork_right] = 1;

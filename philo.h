@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:58:38 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/14 22:08:52 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:56:58 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		set_info(int ac, char **av, t_info *info);
 // set_philo.c
 int		set_philo(t_philo **philo, t_info *info);
 // simulate.c
-void	thread_sleep(time_t time, t_philo *philo);
+int		simulate(t_philo *philo);
 // simulate_action.c
 int		take_left_fork(t_philo *philo);
 int		take_right_fork(t_philo *philo);
@@ -65,7 +65,7 @@ int		sleeping_thinking(t_philo *philo);
 int		ft_strlen(const char *s);
 int		ft_error(char *str);
 time_t	get_time(t_philo *philo);
-void	simulate(t_philo *philo);
+void	thread_sleep(time_t time, t_philo *philo);
 int		print_condition(t_philo *philo, char *str);
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 22:48:51 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/14 22:07:15 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:58:48 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ static void	*run_thread(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&(philo->info->start));
 	pthread_mutex_unlock(&(philo->info->start));
-	if (philo->id % 2 == 0)
+	if (philo->info->philo_cnt == 1)
+		;
+	else if (philo->id % 2 == 0)
 		thread_sleep(philo->info->eat_time, philo);
 	while (1)
 	{
@@ -82,7 +84,7 @@ static void	*run_thread(void *arg)
 	return (NULL);
 }
 
-void	simulate(t_philo *philo)
+int	simulate(t_philo *philo)
 {
 	int			i;
 
@@ -108,4 +110,5 @@ void	simulate(t_philo *philo)
 	i = -1;
 	while (++i < philo->info->philo_cnt)
 		pthread_join(philo[i].thread, NULL);
+	return (1);
 }
