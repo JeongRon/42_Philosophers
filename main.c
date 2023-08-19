@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 18:05:53 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/15 17:45:23 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:50:45 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ int	main(int ac, char **av)
 	info.fork_state = NULL;
 	philo = NULL;
 	if (set_info(ac, av, &info) == 1)
+	{
 		if (set_philo(&philo, &info) == 1)
+		{
 			simulate(philo);
-	free_all(philo, &info);
+			free_all(philo, &info);
+		}
+
+	}
 	return (0);
 }

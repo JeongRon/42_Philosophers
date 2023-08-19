@@ -6,7 +6,7 @@
 /*   By: jeongrol <jeongrol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 22:48:51 by jeongrol          #+#    #+#             */
-/*   Updated: 2023/08/15 14:58:48 by jeongrol         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:52:11 by jeongrol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	died_check(t_philo *philo)
 		pthread_mutex_unlock(&(philo->info->start));
 		if (philo_life_time > philo->info->life_time)
 		{
-			print_condition(philo, "died");
+			print_condition(&(philo[i]), "died");
 			return (0);
 		}
 	}
